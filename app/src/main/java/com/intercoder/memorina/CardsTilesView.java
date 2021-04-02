@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+//TODO: can be done as two separate files
 class Card {
     Paint p = new Paint();
     int color_index;
@@ -32,6 +33,7 @@ class Card {
     float scale_factor = (float) 557/350;
     Context ctx;
     Resources res;
+    //TODO: add a loop here
     int[] res_icons = {R.drawable.card_1, R.drawable.card_2, R.drawable.card_3, R.drawable.card_4,
             R.drawable.card_5, R.drawable.card_6, R.drawable.card_7, R.drawable.card_8,
             R.drawable.card_9, R.drawable.card_10};
@@ -64,7 +66,8 @@ class Card {
         }else{
             image = res.getDrawable(R.drawable.card_closed, null);
         }
-        image.setBounds((int)(x*w - shift_x + w/2), (int)(y*h - shift_y + h/2), (int)(x*w+shift_x + w/2),(int)(y*h + shift_y + h/2));
+        image.setBounds((int)(x*w - shift_x + w/2), (int)(y*h - shift_y + h/2),
+                (int)(x*w+shift_x + w/2),(int)(y*h + shift_y + h/2));
         image.draw(c);
     }
 
@@ -157,6 +160,7 @@ public class CardsTilesView extends View {
         indexes.clear();
         indexes_pict.clear();
         SCORE = 50;
+        //todo string resource here
         scoreView.setText((String)(context.getResources().getString(R.string.label_score) + " " + SCORE));
         invalidate();
         int c = 0;
@@ -214,6 +218,7 @@ public class CardsTilesView extends View {
         mDialogBuilder.setView(promptsView);
         mDialogBuilder
                 .setCancelable(false)
+                // todo string res here
                 .setPositiveButton("Новая игра",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
@@ -229,9 +234,11 @@ public class CardsTilesView extends View {
         COUNT_CARDS = count;
         TIMEOUT = timeout;
         scoreView = textView;
+        // todo string res
         scoreView.setText((String)(context.getResources().getString(R.string.label_score) + " " + SCORE));
 
         // хардкодинг
+        //todo *try* to fix hardcode
         if(count < 6){
             divider = 2;
         }else if(count < 12){
@@ -249,6 +256,7 @@ public class CardsTilesView extends View {
 
     public void addScore(int step){
         SCORE += step;
+        //todo string res
         scoreView.setText((String)(context.getResources().getString(R.string.label_score) + " " + SCORE));
     }
 
