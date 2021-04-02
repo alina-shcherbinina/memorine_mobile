@@ -8,6 +8,7 @@
     <string name="label_win">Победа!</string>
     <string name="label_new_game">Новая игра</string>
     <string name="label_settings">Настройки</string>
+    <string name="label_cancel">Отмена</string>
     <string name="label_exit">Выход</string>
     <string name="label_game_name">МЕМОРИНА</string>
 </resources>

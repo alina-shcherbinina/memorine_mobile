@@ -23,69 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-//TODO: can be done as two separate files
-class Card {
-    Paint p = new Paint();
-    int color_index;
-    float x, y, col, row, max_width, max_height;
-    int width, height;
-    boolean isOpen = false;
-    float scale_factor = (float) 557/350;
-    Context ctx;
-    Resources res;
-    //TODO: add a loop here
-    int[] res_icons = {R.drawable.card_1, R.drawable.card_2, R.drawable.card_3, R.drawable.card_4,
-            R.drawable.card_5, R.drawable.card_6, R.drawable.card_7, R.drawable.card_8,
-            R.drawable.card_9, R.drawable.card_10};
-
-    public Card(float x, float y, float col, float row, int color, Context ctx) {
-        this.color_index = color;
-        this.x = x;
-        this.y = y;
-        this.col = col;
-        this.row = row;
-        this.ctx = ctx;
-        res = ctx.getResources();
-    }
-
-    public void draw(Canvas c) {
-        width = c.getWidth();
-        height = c.getHeight();
-
-        max_width = (float) width / 5;
-        max_height = (float) max_width * scale_factor;
-
-        float shift_x = max_width/2;
-        float shift_y = max_height/2;
-        float w = width/col;
-        float h = height/row;
-
-        Drawable image;
-        if(isOpen && color_index != -1) {
-            image = res.getDrawable(res_icons[color_index], null);
-        }else{
-            image = res.getDrawable(R.drawable.card_closed, null);
-        }
-        image.setBounds((int)(x*w - shift_x + w/2), (int)(y*h - shift_y + h/2),
-                (int)(x*w+shift_x + w/2),(int)(y*h + shift_y + h/2));
-        image.draw(c);
-    }
-
-    public boolean flip (float touch_x, float touch_y) {
-        float shift_x = max_width/2;
-        float shift_y = max_height/2;
-        float w = width/col;
-        float h = height/row;
-        if (touch_x >= (x*w - shift_x + w/2) && touch_x <= (x*w + shift_x + w/2) &&
-                touch_y >= (y*h - shift_y + h/2) && touch_y <= y*h + shift_y + h/2) {
-            isOpen =! isOpen;
-            return true;
-        }
-        return false;
-    }
-
-}
-
 public class CardsTilesView extends View {
     ArrayList<Card> cards = new ArrayList<>();
     List<Integer> indexes = new ArrayList<>();
@@ -161,7 +98,7 @@ public class CardsTilesView extends View {
         indexes_pict.clear();
         SCORE = 50;
         //todo string resource here
-        scoreView.setText((String)(context.getResources().getString(R.string.label_score) + " " + SCORE));
+        scoreView.setText((String)(R.string.label_score + " " + SCORE));
         invalidate();
         int c = 0;
 
@@ -219,13 +156,13 @@ public class CardsTilesView extends View {
         mDialogBuilder
                 .setCancelable(false)
                 // todo string res here
-                .setPositiveButton("Новая игра",
+                .setPositiveButton(R.string.label_new_game,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
                                 newGame();
                             }
                         })
-                .setNegativeButton("Отмена", null);
+                .setNegativeButton(R.string.label_cancel, null);
         AlertDialog alertDialog = mDialogBuilder.create();
         alertDialog.show();
     }
@@ -235,10 +172,10 @@ public class CardsTilesView extends View {
         TIMEOUT = timeout;
         scoreView = textView;
         // todo string res
-        scoreView.setText((String)(context.getResources().getString(R.string.label_score) + " " + SCORE));
+        scoreView.setText(R.string.label_score + " " + SCORE);
 
         // хардкодинг
-        //todo *try* to fix hardcode
+        //todo failed
         if(count < 6){
             divider = 2;
         }else if(count < 12){
@@ -257,7 +194,7 @@ public class CardsTilesView extends View {
     public void addScore(int step){
         SCORE += step;
         //todo string res
-        scoreView.setText((String)(context.getResources().getString(R.string.label_score) + " " + SCORE));
+        scoreView.setText(R.string.label_score + " " + SCORE);
     }
 
     class PauseTask extends AsyncTask<Integer, Void, Void> {

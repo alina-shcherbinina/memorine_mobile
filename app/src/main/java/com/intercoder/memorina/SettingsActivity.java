@@ -36,8 +36,8 @@ public class SettingsActivity extends AppCompatActivity {
         COUNT_CARDS = getIntent().getIntExtra("count", 12);
         TIMEOUT = getIntent().getIntExtra("timeout", 550);
         //todo string res
-        seekText.setText((String)(res.getString(R.string.label_count_cards) + " " + COUNT_CARDS));
-        seekTextTime.setText((String)(res.getString(R.string.label_timeout) + " " + TIMEOUT + "mc"));
+        seekText.setText((String)(R.string.label_count_cards + " " + COUNT_CARDS));
+        seekTextTime.setText((String)(R.string.label_timeout + " " + TIMEOUT + "mc"));
         seekBarCount.setProgress(COUNT_CARDS / 2 - 1);
         seekBarTimeout.setProgress(TIMEOUT / 10);
 
@@ -45,7 +45,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 COUNT_CARDS = (i+1)*2;
                 //todo string res
-                seekText.setText((String)(res.getString(R.string.label_count_cards) + " " + COUNT_CARDS));
+                seekText.setText((String)(R.string.label_count_cards + " " + COUNT_CARDS));
             }
             @Override public void onStartTrackingTouch(SeekBar seekBar) { }
             @Override public void onStopTrackingTouch(SeekBar seekBar) { }
@@ -54,7 +54,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 TIMEOUT = i*10;
                 //todo string res
-                seekTextTime.setText((String)(res.getString(R.string.label_timeout) + " " + TIMEOUT + "mc"));
+                seekTextTime.setText((String)(R.string.label_timeout + " " + TIMEOUT + "mc"));
             }
             @Override public void onStartTrackingTouch(SeekBar seekBar) { }
             @Override public void onStopTrackingTouch(SeekBar seekBar) { }
